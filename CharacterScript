@@ -14,7 +14,7 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] float speed; //almacena la velocidad son variables 
     [SerializeField] float shift; //ayudara a mover al personaje de izquierda a derecha
     [SerializeField] float jumpForce; //Fuerza de salto
-    [SerializeField] Animation anim; //la animación del salto
+    [SerializeField] Animator anim; //la animación del salto
 
     void Start()
     {
@@ -32,6 +32,21 @@ public class CharacterScript : MonoBehaviour
            if(Input.GetKeyDown(KeyCode.D) && transform.position.x < 2)
         {
             transform.Translate(shift, 0, 0);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space)&&rb.velocity.y==0)
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);  
+        }
+
+        if (rb.velocity.y>0.2)
+        {
+            anim.SetBool("jump",true); //aqui el personaje salta
+        }
+
+        if (rb.velocity.y==0.2)
+        {
+            anim.SetBool("jump",false); //aqui el personaje deja de saltar y corre
         }
         
        
