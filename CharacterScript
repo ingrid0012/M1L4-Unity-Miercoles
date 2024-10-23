@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CharacterScript : MonoBehaviour
+{
+    //int = entera
+    //float = decimal 
+    //bol = verdadero o falso 
+    //string = palabras cadenas de texto 
+
+    // Start is called before the first frame update
+    [SerializeField] Rigidbody rb;// almacena al rigidbody
+    [SerializeField] float speed; //almacena la velocidad son variables 
+    [SerializeField] float shift; //ayudara a mover al personaje de izquierda a derecha
+    [SerializeField] float jumpForce; //Fuerza de salto
+    [SerializeField] Animation anim; //la animación del salto
+
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A)&& transform.position.x>-2)
+        {
+            transform.Translate(-shift, 0, 0);
+        }
+
+           if(Input.GetKeyDown(KeyCode.D) && transform.position.x < 2)
+        {
+            transform.Translate(shift, 0, 0);
+        }
+        
+       
+
+    }
+    void FixedUpdate()
+    {
+       rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);       
+    }
+}
